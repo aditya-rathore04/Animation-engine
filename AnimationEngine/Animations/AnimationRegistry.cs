@@ -9,8 +9,9 @@ public static class AnimationRegistry
 
     static AnimationRegistry()
     {
-        // Register default plane stub animation
-        Register(new PlaneAnimationStub());
+        // Register default plane animation
+        Register(new PlaneAnimation());
+        Register(new CometAnimation());
     }
 
     /// <summary>

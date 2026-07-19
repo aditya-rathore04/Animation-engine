@@ -1,12 +1,11 @@
 {
   "version": 3,
   "targets": {
-    "net8.0-windows7.0": {},
-    "net8.0-windows7.0/win-x64": {}
+    "net8.0-windows10.0.19041": {}
   },
   "libraries": {},
   "projectFileDependencyGroups": {
-    "net8.0-windows7.0": []
+    "net8.0-windows10.0.19041": []
   },
   "packageFolders": {
     "C:\\Users\\adity\\.nuget\\packages\\": {}
@@ -24,14 +23,14 @@
         "C:\\Users\\adity\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
-        "net8.0-windows"
+        "net8.0-windows10.0.19041.0"
       ],
       "sources": {
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net8.0-windows7.0": {
-          "targetAlias": "net8.0-windows",
+        "net8.0-windows10.0.19041": {
+          "targetAlias": "net8.0-windows10.0.19041.0",
           "projectReferences": {}
         }
       },
@@ -47,8 +46,8 @@
       }
     },
     "frameworks": {
-      "net8.0-windows7.0": {
-        "targetAlias": "net8.0-windows",
+      "net8.0-windows10.0.19041": {
+        "targetAlias": "net8.0-windows10.0.19041.0",
         "imports": [
           "net461",
           "net462",
@@ -60,8 +59,17 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.Windows.SDK.NET.Ref",
+            "version": "[10.0.19041.56, 10.0.19041.56]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          },
+          "Microsoft.Windows.SDK.NET.Ref": {
             "privateAssets": "all"
           },
           "Microsoft.WindowsDesktop.App.WindowsForms": {
@@ -69,11 +77,6 @@
           }
         },
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.423/PortableRuntimeIdentifierGraph.json"
-      }
-    },
-    "runtimes": {
-      "win-x64": {
-        "#import": []
       }
     }
   }

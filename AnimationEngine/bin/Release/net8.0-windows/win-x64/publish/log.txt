@@ -1,2 +1,1 @@
 Server started on http://127.0.0.1:5057/
-[Registry] Style 'nonsense' unrecognized or missing. Falling back to default 'plane' style.

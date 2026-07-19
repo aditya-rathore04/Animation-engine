@@ -1,0 +1,2 @@
+[Config] Generated default config.json
+Server started on http://127.0.0.1:5057/

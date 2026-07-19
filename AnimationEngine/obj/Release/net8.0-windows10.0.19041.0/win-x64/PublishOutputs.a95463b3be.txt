@@ -1,0 +1,7 @@
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\bin\Release\net8.0-windows10.0.19041.0\win-x64\publish\AnimationEngine.exe
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\bin\Release\net8.0-windows10.0.19041.0\win-x64\publish\AnimationEngine.dll
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\bin\Release\net8.0-windows10.0.19041.0\win-x64\publish\AnimationEngine.deps.json
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\bin\Release\net8.0-windows10.0.19041.0\win-x64\publish\AnimationEngine.runtimeconfig.json
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\bin\Release\net8.0-windows10.0.19041.0\win-x64\publish\AnimationEngine.pdb
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\bin\Release\net8.0-windows10.0.19041.0\win-x64\publish\Microsoft.Windows.SDK.NET.dll
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\bin\Release\net8.0-windows10.0.19041.0\win-x64\publish\WinRT.Runtime.dll
