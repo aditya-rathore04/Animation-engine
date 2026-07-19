@@ -1,0 +1,15 @@
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\bin\Release\net8.0-windows\win-x64\AnimationEngine.exe
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\bin\Release\net8.0-windows\win-x64\AnimationEngine.deps.json
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\bin\Release\net8.0-windows\win-x64\AnimationEngine.runtimeconfig.json
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\bin\Release\net8.0-windows\win-x64\AnimationEngine.dll
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\bin\Release\net8.0-windows\win-x64\AnimationEngine.pdb
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\obj\Release\net8.0-windows\win-x64\AnimationEngine.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\obj\Release\net8.0-windows\win-x64\AnimationEngine.AssemblyInfoInputs.cache
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\obj\Release\net8.0-windows\win-x64\AnimationEngine.AssemblyInfo.cs
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\obj\Release\net8.0-windows\win-x64\AnimationEngine.csproj.CoreCompileInputs.cache
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\obj\Release\net8.0-windows\win-x64\AnimationEngine.sourcelink.json
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\obj\Release\net8.0-windows\win-x64\AnimationEngine.dll
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\obj\Release\net8.0-windows\win-x64\refint\AnimationEngine.dll
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\obj\Release\net8.0-windows\win-x64\AnimationEngine.pdb
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\obj\Release\net8.0-windows\win-x64\AnimationEngine.genruntimeconfig.cache
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\obj\Release\net8.0-windows\win-x64\ref\AnimationEngine.dll

@@ -12,3 +12,4 @@ C:\Users\adity\Downloads\Animation Engine\AnimationEngine\obj\Debug\net8.0-windo
 C:\Users\adity\Downloads\Animation Engine\AnimationEngine\obj\Debug\net8.0-windows\AnimationEngine.pdb
 C:\Users\adity\Downloads\Animation Engine\AnimationEngine\obj\Debug\net8.0-windows\AnimationEngine.genruntimeconfig.cache
 C:\Users\adity\Downloads\Animation Engine\AnimationEngine\obj\Debug\net8.0-windows\ref\AnimationEngine.dll
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\obj\Debug\net8.0-windows\AnimationEngine.sourcelink.json

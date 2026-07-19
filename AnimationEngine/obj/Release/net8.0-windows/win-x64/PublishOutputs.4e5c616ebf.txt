@@ -1,0 +1,5 @@
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\bin\Release\net8.0-windows\win-x64\publish\AnimationEngine.exe
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\bin\Release\net8.0-windows\win-x64\publish\AnimationEngine.dll
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\bin\Release\net8.0-windows\win-x64\publish\AnimationEngine.deps.json
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\bin\Release\net8.0-windows\win-x64\publish\AnimationEngine.runtimeconfig.json
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\bin\Release\net8.0-windows\win-x64\publish\AnimationEngine.pdb
