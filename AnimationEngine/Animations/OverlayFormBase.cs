@@ -28,9 +28,9 @@ public class OverlayFormBase : Form
         this.Bounds = screenBounds;
 
         // 3. Transparency key setup
-        // This ensures the Form background is completely transparent
-        this.BackColor = Color.Magenta;
-        this.TransparencyKey = Color.Magenta;
+        // Uses dark key color to prevent purple/magenta halo fringing on anti-aliased edges
+        this.BackColor = Color.FromArgb(1, 1, 1);
+        this.TransparencyKey = Color.FromArgb(1, 1, 1);
     }
 
     /// <summary>

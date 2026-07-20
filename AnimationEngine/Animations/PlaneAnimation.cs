@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Windows.Forms;
 
 namespace AnimationEngine.Animations;
@@ -21,25 +22,42 @@ public class PlaneAnimation : IAnimation
     private class PlaneOverlayForm : OverlayFormBase
     {
         private readonly string _message;
-        private int _baseY;
-        private int _systemWidth;
-        private int _bannerWidth;
-        private int _bannerHeight;
-        private int _textWidth;
-        private int _textHeight;
-        
-        // Large plane size (approx 7-8 times larger than initial 60x30 stub)
-        private const int PlaneWidth = 420;
-        private const int PlaneHeight = 210;
-        private const int ConnectorLength = 60;
-        private const int MaxTextWidth = 600; // Restrict banner width for long messages
+        private readonly Image? _planeImage;
+        private readonly int _baseY;
+        private readonly int _systemWidth;
+        private readonly int _bannerWidth;
+        private readonly int _bannerHeight;
+        private readonly int _textWidth;
+        private readonly int _textHeight;
+        private readonly int _planeWidth;
+        private readonly int _planeHeight;
+
+        private const int TargetPlaneWidth = 350;
+        private const int ConnectorLength = 140; // Spacing for horizontal tow line + V-harness
+        private const int SwallowtailNotch = 50;  // Left swallowtail cut depth
+        private const int MaxTextWidth = 600;     // Restrict banner width for long messages
 
         public PlaneOverlayForm(string message, Rectangle screenBounds) : base(screenBounds)
         {
             _message = message;
-            
+
             // Set vertical center in the upper third
             _baseY = screenBounds.Height / 3;
+
+            // Load plane PNG image safely
+            _planeImage = TryLoadPlaneImage();
+
+            if (_planeImage != null)
+            {
+                _planeWidth = TargetPlaneWidth;
+                _planeHeight = Math.Max(50, (int)Math.Round((double)_planeWidth * _planeImage.Height / _planeImage.Width));
+            }
+            else
+            {
+                // Default fallback dimensions if image is missing
+                _planeWidth = 350;
+                _planeHeight = 175;
+            }
 
             // Measure text size using a large, readable font and supporting wrapping
             using (var g = this.CreateGraphics())
@@ -61,10 +79,38 @@ public class PlaneAnimation : IAnimation
             }
 
             // Calculate banner and system width
-            _bannerWidth = _textWidth + 80; // 40px padding left and right
-            _bannerHeight = Math.Max(PlaneHeight + 20, _textHeight + 50); // scales height for multi-line text
-            
-            _systemWidth = PlaneWidth + ConnectorLength + _bannerWidth;
+            _bannerWidth = _textWidth + SwallowtailNotch + 80; // Padding for text + swallowtail cut
+            _bannerHeight = Math.Max(_planeHeight + 20, _textHeight + 50); // scales height for multi-line text
+
+            _systemWidth = _planeWidth + ConnectorLength + _bannerWidth;
+        }
+
+        private Image? TryLoadPlaneImage()
+        {
+            string[] possiblePaths = new[]
+            {
+                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "plane.png"),
+                Path.Combine(Directory.GetCurrentDirectory(), "Assets", "plane.png"),
+                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "Assets", "plane.png")
+            };
+
+            foreach (var path in possiblePaths)
+            {
+                if (File.Exists(path))
+                {
+                    try
+                    {
+                        return Image.FromFile(path);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"[PlaneAnimation] Failed loading image at {path}: {ex.Message}");
+                    }
+                }
+            }
+
+            Console.WriteLine("[PlaneAnimation] Warning: Assets/plane.png not found.");
+            return null;
         }
 
         public void Start(int durationMs)
@@ -93,98 +139,107 @@ public class PlaneAnimation : IAnimation
 
             // Define sub-positions
             int planeX = currentX + _bannerWidth + ConnectorLength;
-            int planeY = currentY + (_bannerHeight - PlaneHeight) / 2;
+            int planeY = currentY + (_bannerHeight - _planeHeight) / 2;
 
             int bannerX = currentX;
             int bannerY = currentY;
 
-            // 3. Draw Drop Shadow for the Banner
-            using (var shadowPath = GetRoundedRectPath(new Rectangle(bannerX + 10, bannerY + 10, _bannerWidth, _bannerHeight), 24))
-            using (var shadowBrush = new SolidBrush(Color.FromArgb(40, 0, 0, 0)))
+            // 3. Draw Towing Rigging (#B3B3B3, 4px thick solid gray rope in V-harness / Y-shape)
+            Color ropeColor = Color.FromArgb(255, 179, 179, 179); // #B3B3B3
+            using (var ropePen = new Pen(ropeColor, 4f))
             {
-                e.Graphics.FillPath(shadowBrush, shadowPath);
+                ropePen.StartCap = LineCap.Round;
+                ropePen.EndCap = LineCap.Round;
+                ropePen.LineJoin = LineJoin.Round;
+
+                Point pTail = new Point(planeX + 5, planeY + _planeHeight / 2);
+                Point pSplit = new Point(bannerX + _bannerWidth + 70, bannerY + _bannerHeight / 2);
+                Point pTopGrommet = new Point(bannerX + _bannerWidth - 4, bannerY + 12);
+                Point pBotGrommet = new Point(bannerX + _bannerWidth - 4, bannerY + _bannerHeight - 12);
+
+                // Horizontal line from plane tail to harness split point
+                e.Graphics.DrawLine(ropePen, pTail, pSplit);
+
+                // Sideways triangle V-harness arms to top and bottom banner corners
+                e.Graphics.DrawLine(ropePen, pSplit, pTopGrommet);
+                e.Graphics.DrawLine(ropePen, pSplit, pBotGrommet);
             }
 
-            // 4. Draw Connecting String/Cable
-            using (var pen = new Pen(Color.FromArgb(160, 200, 200, 210), 3f))
-            {
-                pen.DashStyle = DashStyle.Dash;
-                // Connect plane tail center to banner front center
-                e.Graphics.DrawLine(pen, 
-                    planeX + 25, planeY + PlaneHeight / 2, 
-                    bannerX + _bannerWidth, bannerY + _bannerHeight / 2);
-            }
-
-            // 5. Draw Banner Card
-            using (var bannerPath = GetRoundedRectPath(new Rectangle(bannerX, bannerY, _bannerWidth, _bannerHeight), 24))
-            // Premium background gradient from dark graphite to deep slate-indigo
-            using (var bannerBrush = new LinearGradientBrush(
-                new Rectangle(bannerX, bannerY, _bannerWidth, _bannerHeight),
-                Color.FromArgb(245, 18, 20, 28),
-                Color.FromArgb(245, 33, 37, 51),
-                15f))
-            using (var borderPen = new Pen(Color.FromArgb(100, 100, 110, 130), 2f))
+            // 4. Draw Swallowtail Cloth Banner (White background with 2px thin black border)
+            using (var bannerPath = GetSwallowtailBannerPath(bannerX, bannerY, _bannerWidth, _bannerHeight, SwallowtailNotch))
+            using (var bannerBrush = new SolidBrush(Color.White))
+            using (var borderPen = new Pen(Color.Black, 2f))
             {
                 e.Graphics.FillPath(bannerBrush, bannerPath);
                 e.Graphics.DrawPath(borderPen, bannerPath);
             }
 
-            // 6. Draw Message Text with word-wrap support
+            // 5. Draw Attachment Grommet Rings on Banner Right Corners
+            using (var grommetBrush = new SolidBrush(Color.FromArgb(255, 120, 120, 120)))
+            using (var holeBrush = new SolidBrush(Color.White))
+            {
+                int gSize = 10;
+                // Top Right Grommet
+                e.Graphics.FillEllipse(grommetBrush, bannerX + _bannerWidth - 14, bannerY + 7, gSize, gSize);
+                e.Graphics.FillEllipse(holeBrush, bannerX + _bannerWidth - 12, bannerY + 9, gSize - 4, gSize - 4);
+
+                // Bottom Right Grommet
+                e.Graphics.FillEllipse(grommetBrush, bannerX + _bannerWidth - 14, bannerY + _bannerHeight - 17, gSize, gSize);
+                e.Graphics.FillEllipse(holeBrush, bannerX + _bannerWidth - 12, bannerY + _bannerHeight - 15, gSize - 4, gSize - 4);
+            }
+
+            // 6. Draw Message Text in Solid Black (centered in banner main body)
             using (var font = new Font("Segoe UI", 26, FontStyle.Bold))
-            using (var textBrush = new SolidBrush(Color.FromArgb(255, 248, 249, 250)))
+            using (var textBrush = new SolidBrush(Color.Black))
             {
                 var sf = new StringFormat
                 {
                     Alignment = StringAlignment.Center,
                     LineAlignment = StringAlignment.Center
                 };
-                
-                // Position text container with 40px left/right padding
-                var textRect = new Rectangle(bannerX + 40, bannerY + (_bannerHeight - _textHeight) / 2, _textWidth, _textHeight);
+
+                var textRect = new Rectangle(bannerX + SwallowtailNotch + 40, bannerY + (_bannerHeight - _textHeight) / 2, _textWidth, _textHeight);
                 e.Graphics.DrawString(_message, font, textBrush, textRect, sf);
             }
 
-            // 7. Draw Origami Paper Airplane (Slate Indigo Theme)
-            // Coordinates relative to planeX, planeY
-            PointF tip = new PointF(planeX + PlaneWidth, planeY + PlaneHeight / 2f);
-            PointF centerCrease = new PointF(planeX + PlaneWidth * 0.4f, planeY + PlaneHeight / 2f);
-            PointF topEdgeBack = new PointF(planeX + PlaneWidth * 0.1f, planeY + PlaneHeight * 0.08f);
-            PointF bottomEdgeBack = new PointF(planeX + PlaneWidth * 0.1f, planeY + PlaneHeight * 0.92f);
-            PointF wingTopBack = new PointF(planeX, planeY);
-            PointF wingBottomBack = new PointF(planeX, planeY + PlaneHeight);
-
-            // Facet 1: Underside/Body Top (Darker shadow)
-            using (var brush = new SolidBrush(Color.FromArgb(255, 67, 56, 202)))
+            // 7. Draw Plane Image
+            if (_planeImage != null)
             {
-                e.Graphics.FillPolygon(brush, new[] { tip, centerCrease, topEdgeBack });
+                e.Graphics.DrawImage(_planeImage, planeX, planeY, _planeWidth, _planeHeight);
             }
-            // Facet 2: Underside/Body Bottom (Deepest shadow)
-            using (var brush = new SolidBrush(Color.FromArgb(255, 49, 46, 129)))
+            else
             {
-                e.Graphics.FillPolygon(brush, new[] { tip, centerCrease, bottomEdgeBack });
-            }
-            // Facet 3: Wing Top (Lightest / Main reflected surface)
-            using (var brush = new SolidBrush(Color.FromArgb(255, 129, 140, 248)))
-            {
-                e.Graphics.FillPolygon(brush, new[] { tip, topEdgeBack, wingTopBack });
-            }
-            // Facet 4: Wing Bottom (Medium reflected surface)
-            using (var brush = new SolidBrush(Color.FromArgb(255, 99, 102, 241)))
-            {
-                e.Graphics.FillPolygon(brush, new[] { tip, bottomEdgeBack, wingBottomBack });
+                // Fallback rendering if plane.png missing
+                using (var pen = new Pen(Color.Red, 4f))
+                {
+                    e.Graphics.DrawRectangle(pen, planeX, planeY, _planeWidth, _planeHeight);
+                }
             }
         }
 
-        private GraphicsPath GetRoundedRectPath(Rectangle rect, int radius)
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _planeImage?.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private GraphicsPath GetSwallowtailBannerPath(int x, int y, int width, int height, int notchDepth)
         {
             var path = new GraphicsPath();
-            int diameter = radius * 2;
-            path.AddArc(rect.X, rect.Y, diameter, diameter, 180, 90);
-            path.AddArc(rect.Right - diameter, rect.Y, diameter, diameter, 270, 90);
-            path.AddArc(rect.Right - diameter, rect.Bottom - diameter, diameter, diameter, 0, 90);
-            path.AddArc(rect.X, rect.Bottom - diameter, diameter, diameter, 90, 90);
-            path.CloseFigure();
+            path.AddPolygon(new[]
+            {
+                new Point(x, y),                                   // Top Left
+                new Point(x + width, y),                            // Top Right
+                new Point(x + width, y + height),                   // Bottom Right
+                new Point(x, y + height),                          // Bottom Left
+                new Point(x + notchDepth, y + height / 2)           // Swallowtail V-notch center
+            });
             return path;
         }
     }
 }
+
+

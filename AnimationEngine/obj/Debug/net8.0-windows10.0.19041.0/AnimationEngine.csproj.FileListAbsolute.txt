@@ -16,3 +16,5 @@ C:\Users\adity\Downloads\Animation Engine\AnimationEngine\obj\Debug\net8.0-windo
 C:\Users\adity\Downloads\Animation Engine\AnimationEngine\obj\Debug\net8.0-windows10.0.19041.0\AnimationEngine.pdb
 C:\Users\adity\Downloads\Animation Engine\AnimationEngine\obj\Debug\net8.0-windows10.0.19041.0\AnimationEngine.genruntimeconfig.cache
 C:\Users\adity\Downloads\Animation Engine\AnimationEngine\obj\Debug\net8.0-windows10.0.19041.0\ref\AnimationEngine.dll
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\bin\Debug\net8.0-windows10.0.19041.0\Assets\plane.png
+C:\Users\adity\Downloads\Animation Engine\AnimationEngine\bin\Debug\net8.0-windows10.0.19041.0\Assets\comet.png
