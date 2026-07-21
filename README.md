@@ -14,10 +14,10 @@ Under the hood, it is a lightweight C# .NET 8 Windows system tray app that rende
 ## 🌟 Visual Preview
 
 ### ✈️ Plane Animation
-<video src="https://raw.githubusercontent.com/aditya-rathore04/Animation-engine/main/docs/assets/plane%20(1).mp4" controls width="100%" muted autoplay loop></video>
+![Plane Animation](docs/assets/plane.gif)
 
 ### ☄️ Comet Animation
-<video src="https://raw.githubusercontent.com/aditya-rathore04/Animation-engine/main/docs/assets/comet.mp4" controls width="100%" muted autoplay loop></video>
+![Comet Animation](docs/assets/comet.gif)
 
 ---
 
