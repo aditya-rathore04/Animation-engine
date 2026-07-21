@@ -15,11 +15,9 @@ A lightweight C# .NET 8 Windows system tray application that renders non-intrusi
 
 | **Plane Animation** | **Comet Animation** |
 | :---: | :---: |
-| ![Plane Animation Demo](C:\Users\adity\Downloads\Animation Engine\docs\assets\plane (1).mp4) | ![Comet Animation Demo](C:\Users\adity\Downloads\Animation Engine\docs\assets\comet.mp4) |
+| ![Plane Animation Demo](https://github.com/aditya-rathore04/Animation-engine/blob/main/docs/assets/plane%20(1).mp4) | ![Comet Animation Demo](https://github.com/aditya-rathore04/Animation-engine/blob/main/docs/assets/comet.mp4) |
 
-*(Note: Replace preview URLs with actual recordings/GIFs when uploaded to `docs/assets/`)*
 
----
 
 ## ✨ Key Features
 
