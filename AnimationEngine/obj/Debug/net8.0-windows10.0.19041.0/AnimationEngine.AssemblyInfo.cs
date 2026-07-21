@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AnimationEngine")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f9522a8558f90303d2e4a80278cf5455281bde55")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d2f641c9fac81bdfaa02c1801d52f23670915069")]
 [assembly: System.Reflection.AssemblyProductAttribute("AnimationEngine")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AnimationEngine")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
