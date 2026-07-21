@@ -3,23 +3,24 @@
 ![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=c-sharp&logoColor=white)
 ![.NET 8.0](https://img.shields.io/badge/.NET%208.0-512BD4?style=for-the-badge&logo=.net&logoColor=white)
 ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
-A lightweight C# .NET 8 Windows system tray application that renders non-intrusive, owner-drawn GDI+ visual animations (such as flying planes with message banners or glowing comets) triggered via a local HTTP API.
+**Animation Engine** displays fun, smooth screen overlays — like a plane trailing a banner or a glowing comet streak — to show reminders without stealing window focus.
+
+Under the hood, it is a lightweight C# .NET 8 Windows system tray app that renders GDI+ animations triggered locally via a simple HTTP API.
 
 ---
 
 ## 🌟 Visual Preview
 
-> *Visual animation previews showing the plane banner and comet overlay in action:*
+### ✈️ Plane Animation
+<video src="https://raw.githubusercontent.com/aditya-rathore04/Animation-engine/main/docs/assets/plane%20(1).mp4" controls width="100%" muted autoplay loop></video>
 
-| **Plane Animation** | **Comet Animation** |
-| :---: | :---: |
-| ![Plane Animation Demo](https://github.com/aditya-rathore04/Animation-engine/blob/main/docs/assets/plane%20(1).mp4) | ![Comet Animation Demo](https://github.com/aditya-rathore04/Animation-engine/blob/main/docs/assets/comet.mp4) |
+### ☄️ Comet Animation
+<video src="https://raw.githubusercontent.com/aditya-rathore04/Animation-engine/main/docs/assets/comet.mp4" controls width="100%" muted autoplay loop></video>
 
+---
 
-
-## ✨ Key Features
 
 - **Near-Zero Footprint:** Silent Windows system tray resident using `NotifyIcon` with minimal memory/CPU usage when idle.
 - **Non-Intrusive Overlays:** Click-through, topmost GDI+ rendered overlays that never steal window focus or block user interactions.
